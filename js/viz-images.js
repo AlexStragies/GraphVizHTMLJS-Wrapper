@@ -81,10 +81,6 @@ var MyGVImages = {
      height: "60px",
      width: "173px"
    }, {
-     path:"img/logos/logo_reckinger.png",
-     height: "23.9px",
-     width: "39.2px"
-   }, {
      path:"img/logos/logo_snom.png",
      height: "132px",
      width: "132px"
@@ -144,10 +140,6 @@ var MyGVImages = {
      path:"img/laptop.png",
      height: "24px",
      width: "41px"
-   },{
-     path:"img/modemlobo.png",
-     height: "20px",
-     width: "34px"
    },{
      path:"img/alarm.png",
      height: "21px",

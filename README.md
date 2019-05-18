@@ -15,6 +15,13 @@ Features include:
 - Chapters can be hidden/shown depending on tags
 
 
+Uses:
+LZ-String from https://github.com/pieroxy/lz-string
+Org.js from https://github.com/mooz/org-js
+tablesort from (i think) https://github.com/tristen/tablesort
+viz.js from https://github.com/mdaines/viz.js/
+
+
 I'm uploading cleaned bits of this as I find time, so WIP.
 
 (Note, I'll add links to the source repos for the used ones soon too)
