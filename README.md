@@ -1,10 +1,11 @@
 # ORGJS-Wrapper
-ORG-JS Wrapper is javascript wrapper around some preexisting Javascript libraries that can render ORG files with embedded objects of various types.
+ORG-JS Wrapper is Javascript wrapper around some preexisting Javascript libraries that can render [org](https://github.com/abo-abo/org-mode)-files with embedded objects of various types.
+
+Main rendering is done by [org.js](https://github.com/mooz/org-js), then embedded objects are rendered/animated.
 
 Features include:
 
-- Renders ORG code with org.js
-- Renders embedded graphviz with viz.js
+- Renders embedded [Graphviz](https://www.graphviz.org/) with [viz.js](https://github.com/mdaines/viz.js/)
 - Renders Math with mathjax
 - All tables are sortable, and can be rotated clientside
 - Various print output options with runtime-chooseable CSS-hacks.
@@ -16,10 +17,11 @@ Features include:
 
 
 Uses:
-LZ-String from https://github.com/pieroxy/lz-string
-Org.js from https://github.com/mooz/org-js
-tablesort from (i think) https://github.com/tristen/tablesort
-viz.js from https://github.com/mdaines/viz.js/
+- LZ-String from https://github.com/pieroxy/lz-string
+- Org.js from https://github.com/mooz/org-js
+- tablesort from (i think) https://github.com/tristen/tablesort
+- viz.js from https://github.com/mdaines/viz.js/
+- something called (iirc) vkbeautify
 
 
 I'm uploading cleaned bits of this as I find time, so WIP.
