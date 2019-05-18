@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created by diasvg.py -->
+<svg width="2.000cm" height="1.700cm" viewBox="-0.000 -0.000 2.000 1.700"
+ xmlns="http://www.w3.org/2000/svg"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+<polygon fill="#000000" stroke="none" stroke-width="0.001" points="0.000,0.000 2.000,0.000 2.000,1.700 1.000,1.700 1.000,1.500 1.300,1.500 1.300,1.300 1.800,1.300 1.800,0.200 0.200,0.200 0.200,1.300 0.700,1.300 0.700,1.500 1.000,1.500 1.000,1.700 0.000,1.700 "/>
+<polygon fill="none" stroke="#000000" stroke-width="0.001"  points="0.000,0.000 2.000,0.000 2.000,1.700 1.000,1.700 1.000,1.500 1.300,1.500 1.300,1.300 1.800,1.300 1.800,0.200 0.200,0.200 0.200,1.300 0.700,1.300 0.700,1.500 1.000,1.500 1.000,1.700 0.000,1.700 "/>
+<rect x="0.200" y="1.400" width="0.400" height="0.200" fill="#00FF00" stroke="none" stroke-width="0"/>
+<rect x="0.200" y="1.400" width="0.400" height="0.200" fill="none" stroke="#000000" stroke-width="0.001" />
+<rect x="1.400" y="1.400" width="0.400" height="0.200" fill="#FFA500" stroke="none" stroke-width="0"/>
+<rect x="1.400" y="1.400" width="0.400" height="0.200" fill="none" stroke="#000000" stroke-width="0.001" />
+<line x1="0.909" y1="0.200" x2="0.909" y2="0.500" stroke="#6F6F6F" stroke-width="0.100" />
+<line x1="1.091" y1="0.200" x2="1.091" y2="0.500" stroke="#6F6F6F" stroke-width="0.100" />
+<line x1="0.730" y1="0.200" x2="0.730" y2="0.500" stroke="#6F6F6F" stroke-width="0.100" />
+<line x1="1.270" y1="0.200" x2="1.270" y2="0.500" stroke="#6F6F6F" stroke-width="0.100" />
+<line x1="0.550" y1="0.200" x2="0.550" y2="0.500" stroke="#6F6F6F" stroke-width="0.100" />
+<line x1="1.452" y1="0.200" x2="1.452" y2="0.500" stroke="#6F6F6F" stroke-width="0.100" />
+<line x1="1.630" y1="0.200" x2="1.630" y2="0.500" stroke="#6F6F6F" stroke-width="0.100" />
+<line x1="0.370" y1="0.200" x2="0.370" y2="0.500" stroke="#6F6F6F" stroke-width="0.100" />
+</svg>

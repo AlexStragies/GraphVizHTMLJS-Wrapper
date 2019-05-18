@@ -1,0 +1,691 @@
+/* line 1, _orgmode.scss */
+.org-container {
+  /* Main TOC toggle */
+  /* Section Number Toggle and related tags */
+  /* Tag Containers & related tags */
+  /* TODO status*/ }
+  /* line 3, _orgmode.scss */
+  .org-container li > a:hover,
+  .org-container li > a:hover tag {
+    background-color: yellow; }
+  /* line 9, _orgmode.scss */
+  .org-container input#toc-toggle[type="checkbox"] ~ div.toc > ul {
+    display: none; }
+  /* line 13, _orgmode.scss */
+  .org-container input#toc-toggle[type="checkbox"]:checked ~ div.toc > ul {
+    display: block; }
+  /* line 17, _orgmode.scss */
+  .org-container input#toc-toggle ~ h1 > div.org-options label#rdToc {
+    position: relative;
+    display: inline-block;
+    /* don't wrap to multiple lines */ }
+  /* line 22, _orgmode.scss */
+  .org-container input#toc-toggle:checked ~ h1 > div.org-options label#rdToc:after {
+    border: 0; }
+  /* line 26, _orgmode.scss */
+  .org-container input#toc-toggle ~ h1 > div.org-options label#rdToc:after {
+    content: "";
+    /* required property */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-top: 2px solid red;
+    height: 45%;
+    /* adjust as necessary, depending on line thickness */
+    /* or use calc() if you don't need to support IE8: */
+    height: calc(50% - 1px);
+    /* 1px = half the line thickness */
+    width: 100%;
+    transform: rotateZ(-20deg); }
+  /* line 39, _orgmode.scss */
+  .org-container #tocToggle > checked ~ div.toc {
+    page-break-after: always; }
+  /* line 46, _orgmode.scss */
+  .org-container > div.toc > ul li > input[type="checkbox"] {
+    display: none; }
+    /* line 49, _orgmode.scss */
+    .org-container > div.toc > ul li > input[type="checkbox"] ~ ul {
+      display: none; }
+    /* line 53, _orgmode.scss */
+    .org-container > div.toc > ul li > input[type="checkbox"] ~ label.closed {
+      display: inline; }
+    /* line 57, _orgmode.scss */
+    .org-container > div.toc > ul li > input[type="checkbox"] ~ label.open {
+      display: none; }
+    /* line 62, _orgmode.scss */
+    .org-container > div.toc > ul li > input[type="checkbox"]:checked ~ label.closed {
+      display: none; }
+    /* line 66, _orgmode.scss */
+    .org-container > div.toc > ul li > input[type="checkbox"]:checked ~ label.open {
+      display: inline; }
+    /* line 70, _orgmode.scss */
+    .org-container > div.toc > ul li > input[type="checkbox"]:checked ~ ul {
+      display: block; }
+  /* line 79, _orgmode.scss */
+  .org-container > div.toc input.toggle[type="checkbox"] + li,
+  .org-container > div.toc input.toggle[type="checkbox"]
+  + input.toggle[type="checkbox"] + li,
+  .org-container > div.toc input.toggle[type="checkbox"]
+  + input.toggle[type="checkbox"]
+  + input.toggle[type="checkbox"] + li {
+    display: none; }
+  /* line 88, _orgmode.scss */
+  .org-container > div.toc input.toggle[type="checkbox"]:checked + li,
+  .org-container > div.toc input.toggle[type="checkbox"]:checked
+  + input.toggle[type="checkbox"] + li,
+  .org-container > div.toc input.toggle[type="checkbox"]
+  + input.toggle[type="checkbox"]:checked + li,
+  .org-container > div.toc input.toggle[type="checkbox"]:checked
+  + input.toggle[type="checkbox"]
+  + input.toggle[type="checkbox"] + li,
+  .org-container > div.toc input.toggle[type="checkbox"]
+  + input.toggle[type="checkbox"]:checked
+  + input.toggle[type="checkbox"] + li,
+  .org-container > div.toc input.toggle[type="checkbox"]
+  + input.toggle[type="checkbox"]
+  + input.toggle[type="checkbox"]:checked + li {
+    display: list-item; }
+  /* line 106, _orgmode.scss */
+  .org-container > div.orgChapter {
+    /* Here we are cheating to "hint" the pagebreaks: */
+    border: solid 1px white;
+    page-break-inside: avoid; }
+    /* line 111, _orgmode.scss */
+    .org-container > div.orgChapter input.toggle.hidden[type="checkbox"],
+    .org-container > div.orgChapter input.toggle.hidden[type="checkbox"] ~ * {
+      display: none; }
+    /* line 127, _orgmode.scss */
+    .org-container > div.orgChapter input.toggle[type="checkbox"]:checked ~ i, .org-container > div.orgChapter input.toggle[type="checkbox"]:checked ~ code,
+    .org-container > div.orgChapter input.toggle[type="checkbox"] >
+    input.toggle[type="checkbox"]:checked ~ i,
+    .org-container > div.orgChapter input.toggle[type="checkbox"] >
+    input.toggle[type="checkbox"]:checked ~ code,
+    .org-container > div.orgChapter input.toggle[type="checkbox"] >
+    input.toggle[type="checkbox"] >
+    input.toggle[type="checkbox"]:checked ~ i,
+    .org-container > div.orgChapter input.toggle[type="checkbox"] >
+    input.toggle[type="checkbox"] >
+    input.toggle[type="checkbox"]:checked ~ code,
+    .org-container > div.orgChapter input.toggle[type="checkbox"] >
+    input.toggle[type="checkbox"] >
+    input.toggle[type="checkbox"] >
+    input.toggle[type="checkbox"]:checked ~ i,
+    .org-container > div.orgChapter input.toggle[type="checkbox"] >
+    input.toggle[type="checkbox"] >
+    input.toggle[type="checkbox"] >
+    input.toggle[type="checkbox"]:checked ~ code {
+      display: inline; }
+    /* line 131, _orgmode.scss */
+    .org-container > div.orgChapter input.toggle[type="checkbox"]:checked ~ *,
+    .org-container > div.orgChapter input.toggle[type="checkbox"] >
+    input.toggle[type="checkbox"]:checked ~ *,
+    .org-container > div.orgChapter input.toggle[type="checkbox"] >
+    input.toggle[type="checkbox"] >
+    input.toggle[type="checkbox"]:checked ~ *,
+    .org-container > div.orgChapter input.toggle[type="checkbox"] >
+    input.toggle[type="checkbox"] >
+    input.toggle[type="checkbox"] >
+    input.toggle[type="checkbox"]:checked ~ * {
+      display: inherit; }
+    /* line 136, _orgmode.scss */
+    .org-container > div.orgChapter input.toggle.hidden[type="checkbox"] {
+      display: none; }
+  /* line 141, _orgmode.scss */
+  .org-container .hidden {
+    display: none; }
+  /* line 146, _orgmode.scss */
+  .org-container input#secNum-toggle ~ h1 > div.org-options label#rdSecNum {
+    position: relative;
+    display: inline-block;
+    /* don't wrap to multiple lines */ }
+  /* line 151, _orgmode.scss */
+  .org-container input#secNum-toggle:checked ~ h1 > div.org-options label#rdSecNum:after {
+    border: 0; }
+  /* line 155, _orgmode.scss */
+  .org-container input#secNum-toggle ~ h1 > div.org-options label#rdSecNum:after {
+    content: "";
+    /* required property */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-top: 2px solid red;
+    height: 45%;
+    /* adjust as necessary, depending on line thickness */
+    /* or use calc() if you don't need to support IE8: */
+    height: calc(50% - 1px);
+    /* 1px = half the line thickness */
+    width: 100%;
+    transform: rotateZ(-20deg); }
+  /* line 168, _orgmode.scss */
+  .org-container input#secNum-toggle[type="checkbox"]:checked ~ ul .section-number,
+  .org-container input#secNum-toggle[type="checkbox"]:checked ~ div .section-number {
+    display: none; }
+  /* line 174, _orgmode.scss */
+  .org-container span.org-taggroup {
+    float: right; }
+  /* line 178, _orgmode.scss */
+  .org-container tagselect:hover > taglist {
+    display: block;
+    clear: both;
+    float: right;
+    font-size: x-small; }
+  /* line 185, _orgmode.scss */
+  .org-container taglist {
+    display: none; }
+  /* line 190, _orgmode.scss */
+  .org-container tag:before {
+    content: " :"; }
+  /* line 194, _orgmode.scss */
+  .org-container tag:after {
+    content: ": "; }
+  /* line 199, _orgmode.scss */
+  .org-container tag:hover:before, .org-container tag:hover:after {
+    color: red; }
+  /* line 206, _orgmode.scss */
+  .org-container .tabs {
+    width: 100%;
+    margin: 0 auto; }
+    /* line 210, _orgmode.scss */
+    .org-container .tabs section {
+      clear: both; }
+      /* line 213, _orgmode.scss */
+      .org-container .tabs section div, .org-container .tabs section pre {
+        padding: 0px;
+        width: 100%;
+        border: 1px solid #ddd;
+        background: #fff;
+        line-height: 1.5em;
+        letter-spacing: 0.3px;
+        color: #444; }
+      /* line 223, _orgmode.scss */
+      .org-container .tabs section div h2 {
+        margin: 0;
+        letter-spacing: 1px;
+        color: #34495e; }
+    /* line 230, _orgmode.scss */
+    .org-container .tabs > input,
+    .org-container .tabs section > div,
+    .org-container .tabs section > pre {
+      display: none; }
+    /* line 236, _orgmode.scss */
+    .org-container .tabs > input.rdSVG:checked ~ section > div.blkSVG,
+    .org-container .tabs > input.rdSVGSRC:checked ~ section > pre.blkSVGSRC,
+    .org-container .tabs > input.rdGVSRC:checked ~ section > .blkGVSRC {
+      display: block; }
+    /* line 242, _orgmode.scss */
+    .org-container .tabs > tabnav > ul {
+      list-style: none;
+      margin: -18px 0px 0px 0px;
+      padding: 0; }
+      /* line 247, _orgmode.scss */
+      .org-container .tabs > tabnav > ul > li {
+        float: right; }
+        /* line 250, _orgmode.scss */
+        .org-container .tabs > tabnav > ul > li > span,
+        .org-container .tabs > tabnav > ul > li > label {
+          padding: 2px 15px;
+          border: 1px solid #ddd;
+          border-bottom: 0;
+          background: #eeeeee;
+          color: #444; }
+          /* line 258, _orgmode.scss */
+          .org-container .tabs > tabnav > ul > li > span:hover,
+          .org-container .tabs > tabnav > ul > li > label:hover {
+            background: #dddddd; }
+          /* line 262, _orgmode.scss */
+          .org-container .tabs > tabnav > ul > li > span:hover:not(:active),
+          .org-container .tabs > tabnav > ul > li > label:hover:not(:active) {
+            cursor: pointer; }
+          /* line 266, _orgmode.scss */
+          .org-container .tabs > tabnav > ul > li > span:active,
+          .org-container .tabs > tabnav > ul > li > label:active {
+            background: #ffffff; }
+        /* line 271, _orgmode.scss */
+        .org-container .tabs > tabnav > ul > li:not(:last-child) > * {
+          border-right-width: 0; }
+    /* line 277, _orgmode.scss */
+    .org-container .tabs > input.rdSVG:checked ~ tabnav > ul > li > label.lbSVG,
+    .org-container .tabs > input.rdSVGSRC:checked ~ tabnav > ul > li > label.lbSVGSRC,
+    .org-container .tabs > input.rdGVSRC:checked ~ tabnav > ul > li > label.lbGVSRC {
+      background: white;
+      color: #111;
+      position: relative; }
+      /* line 284, _orgmode.scss */
+      .org-container .tabs > input.rdSVG:checked ~ tabnav > ul > li > label.lbSVG:after,
+      .org-container .tabs > input.rdSVGSRC:checked ~ tabnav > ul > li > label.lbSVGSRC:after,
+      .org-container .tabs > input.rdGVSRC:checked ~ tabnav > ul > li > label.lbGVSRC:after {
+        content: '';
+        display: block;
+        position: absolute;
+        height: 2px;
+        width: 100%;
+        background: #ffffff;
+        left: 0;
+        bottom: -1px; }
+  @media print {
+    /* line 298, _orgmode.scss */
+    .org-container .tabs ul {
+      display: none; }
+    /* line 302, _orgmode.scss */
+    .org-container h2 span.org-taggroup,
+    .org-container h3 span.org-taggroup,
+    .org-container h4 span.org-taggroup,
+    .org-container h5 span.org-taggroup {
+      display: none; } }
+  /* line 310, _orgmode.scss */
+  .org-container tabnav > ul > li > label.lbVwOpt,
+  .org-container tabnav > ul > li > label.lbSzOpt {
+    display: none; }
+  /* line 315, _orgmode.scss */
+  .org-container input.rdVwMax[type="radio"]:checked ~ tabnav > ul > li > label.lbSzMed,
+  .org-container input.rdVwMed[type="radio"]:checked ~ tabnav > ul > li > label.lbSzCen,
+  .org-container input.rdVwCen[type="radio"]:checked ~ tabnav > ul > li > label.lbSzMin,
+  .org-container input.rdVwMin[type="radio"]:checked ~ tabnav > ul > li > label.lbSzMax {
+    display: initial; }
+  /* line 322, _orgmode.scss */
+  .org-container input.rdVwMin[type="radio"]:checked ~ section > div.blkSVG,
+  .org-container input.rdVwMin[type="radio"]:checked ~ section > .blkGVSRC,
+  .org-container input.rdVwMin[type="radio"]:checked ~ section > pre.blkSVGSRC {
+    display: none; }
+  /* line 328, _orgmode.scss */
+  .org-container input.rdVwMed[type="radio"]:checked ~ section > div.blkSVG > svg {
+    width: 100% !important;
+    height: inherit !important; }
+  /* line 332, _orgmode.scss */
+  .org-container input.rdVwMed[type="radio"]:checked ~ section > .blkGVSRC
+  input.rdVwMed[type="radio"]:checked ~ section > pre.blkSVGSRC {
+    height: 520px;
+    resize: vertical;
+    overflow: auto; }
+  /* line 339, _orgmode.scss */
+  .org-container input.rdVwCen[type="radio"]:checked ~ section > div.blkSVG > svg {
+    width: 100% !important; }
+  /* line 342, _orgmode.scss */
+  .org-container input.rdVwCen[type="radio"]:checked ~ section > .blkGVSRC
+  input.rdVwCen[type="radio"]:checked ~ section > pre.blkSVGSRC {
+    height: 250px;
+    resize: vertical;
+    overflow: auto; }
+  /* line 349, _orgmode.scss */
+  .org-container input.rdSVG:checked ~ tabnav .lbGVSRC,
+  .org-container input.rdGVSRC:checked ~ tabnav .lbSVGSRC,
+  .org-container input.rdSVGSRC:checked ~ tabnav .lbSVG {
+    display: initial; }
+  /* line 356, _orgmode.scss */
+  .org-container h1 > div.org-options {
+    float: right; }
+    /* line 359, _orgmode.scss */
+    .org-container h1 > div.org-options > label {
+      display: block; }
+    /* line 360, _orgmode.scss */
+    .org-container h1 > div.org-options > options {
+      display: none; }
+    /* line 363, _orgmode.scss */
+    .org-container h1 > div.org-options:hover > label {
+      display: none; }
+    /* line 364, _orgmode.scss */
+    .org-container h1 > div.org-options:hover > options {
+      display: block; }
+    /* line 367, _orgmode.scss */
+    .org-container h1 > div.org-options label:hover {
+      background-color: #CCC; }
+  @media print {
+    /* line 374, _orgmode.scss */
+    .org-container > h1 > div.org-options {
+      display: none; } }
+  /* line 380, _orgmode.scss */
+  .org-container span.task-status {
+    padding: 0 0.2em;
+    margin-right: 10px;
+    color: white; }
+  /* line 386, _orgmode.scss */
+  .org-container span.task-status.todo {
+    color: white;
+    background-color: #2795b6; }
+  /* line 391, _orgmode.scss */
+  .org-container span.task-status.done {
+    color: white;
+    background-color: #518f1f; }
+  /* line 396, _orgmode.scss */
+  .org-container pre,
+  .org-container pre.prettyprint {
+    background: #1d1f21;
+    background: #fcfcfc;
+    font-family: Menlo, "Bitstream Vera Sans Mono", "DejaVu Sans Mono", Monaco, Consolas, monospace;
+    font-size: 12px;
+    line-height: 1.5;
+    border: 1px solid #cccccc;
+    padding: 10px; }
+
+/* line 3, _svg.scss */
+svg .SFP rect,
+svg .RJ45 rect,
+svg .RJ45U rect {
+  fill: pink; }
+/* line 8, _svg.scss */
+svg .SFP.Active rect,
+svg .RJ45.Active rect,
+svg .RJ45U.Active rect {
+  fill: lightgreen; }
+/* line 13, _svg.scss */
+svg .SFP.UnUsed rect,
+svg .RJ45.UnUsed rect,
+svg .RJ45U.UnUsed rect {
+  fill: lightgrey; }
+/* line 18, _svg.scss */
+svg .SFP.DisConnected rect,
+svg .RJ45.DisConnected rect,
+svg .RJ45U.DisConnected rect {
+  fill: red; }
+/* line 24, _svg.scss */
+svg .Area.trusted rect {
+  fill: green; }
+/* line 27, _svg.scss */
+svg .Area.Untrusted rect {
+  fill: red; }
+
+/* StyleSheet for blabnla */
+/* line 17, _tables.scss */
+table tr > th {
+  background-color: unset;
+  box-shadow: inset 0 0 0 1000px #CCC; }
+/* line 21, _tables.scss */
+table tr:nth-child(odd) {
+  background-color: unset;
+  box-shadow: inset 0 0 0 1000px #FFF; }
+  /* line 24, _tables.scss */
+  table tr:nth-child(odd):hover {
+    background: yellow; }
+/* line 29, _tables.scss */
+table tr:nth-child(even) {
+  background-color: unset;
+  box-shadow: inset 0 0 0 1000px #EEE; }
+  /* line 32, _tables.scss */
+  table tr:nth-child(even):hover {
+    background: yellow; }
+/* line 37, _tables.scss */
+table tr:hover td {
+  background: yellow; }
+/* line 39, _tables.scss */
+table td {
+  border-left: 1px solid white; }
+
+/*# sourceMappingURL=Reckinger.css.map */
+pre.prettyprint>code:before{
+    float: right;
+    background-color: yellow;
+    color: red;
+}
+
+.language-emacs-lisp:before 	{content: "Emacs Lisp";	 }
+.language-graphviz-dot:before {content: "Graphviz DOT";}
+.language-css:before 					{content: "CSS";				 }
+.language-vim:before 					{content: "VIM";				 }
+.language-awk:before 					{content: "AWK";				 }
+.language-scss:before 				{content: "SCSS";				 }
+.language-sh:before 					{content: "Shell";			 }
+.language-html:before 				{content: "HTML";				 }
+.language-svg:before 					{content: "SVG";				 }
+.language-javascript:before 	{content: "Javascript";	 }
+.language-org:before 					{content: "ORG";				 }
+/*
+
+Original highlight.js style (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
+
+*/
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+/*  padding: 0.5em;
+  background: #F0F0F0; */
+  margin-bottom: -17px;
+}
+
+
+/* Base color: saturation 0; */
+
+.hljs,
+.hljs-subst {
+  color: #444;
+}
+
+.hljs-comment {
+  color: #888888;
+}
+
+.hljs-keyword,
+.hljs-attribute,
+.hljs-selector-tag,
+.hljs-meta-keyword,
+.hljs-doctag,
+.hljs-name {
+  font-weight: bold;
+}
+
+
+/* User color: hue: 0 */
+
+.hljs-type,
+.hljs-string,
+.hljs-number,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-quote,
+.hljs-template-tag,
+.hljs-deletion {
+  color: #880000;
+}
+
+.hljs-title,
+.hljs-section {
+  color: #880000;
+  font-weight: bold;
+}
+
+.hljs-regexp,
+.hljs-symbol,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-link,
+.hljs-selector-attr,
+.hljs-selector-pseudo {
+  color: #BC6060;
+}
+
+
+/* Language color: hue: 90; */
+
+.hljs-literal {
+  color: #78A960;
+}
+
+.hljs-built_in,
+.hljs-bullet,
+.hljs-code,
+.hljs-addition {
+  color: #397300;
+}
+
+
+/* Meta color: hue: 200 */
+
+.hljs-meta {
+  color: #1f7199;
+}
+
+.hljs-meta-string {
+  color: #4d99bf;
+}
+
+
+/* Misc effects */
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+block_title > label {
+    display: none;
+    cursor: pointer;
+}
+
+block_title:hover > label.HideBlockTitle ,
+block_title:hover > label.ShowTableNormal {
+    display: inline;
+}
+
+.ShowBlockTitleForce:checked +*+ block_title>label.HideBlockTitle {
+    display: none;
+}
+
+.ShowBlockTitleForce:checked +*+ block_title>label.ShowBlockTitle {
+    display: inline;
+}
+
+.ShowTableTransposed:checked + block_title>label.ShowTableNormal {
+    display: none;
+}
+
+.ShowTableTransposed:checked + block_title>label.ShowTableLandscape {
+    display: inline;
+}
+
+.ShowTableNormal{
+    writing-mode: vertical-rl;
+    transform: rotate(270deg);
+}
+
+.ShowTableTransposed:checked + block_title + table,
+.PrintTransposed {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+}
+
+.hidden {
+    display: none !important;
+}
+
+.ForcePageBreakBefore,
+.ForcePageBreakAfter {
+    display:none;
+}
+
+.ForcePageBreakBefore,
+.ForcePageBreakAfter {
+    background-color:#eee;
+}
+
+h2.avoidPageBreakBefore > .ForcePageBreakBefore,
+h3.avoidPageBreakBefore > .ForcePageBreakBefore,
+h4.avoidPageBreakBefore > .ForcePageBreakBefore,
+h5.avoidPageBreakBefore > .ForcePageBreakBefore,
+h6.avoidPageBreakBefore > .ForcePageBreakBefore,
+h2.avoidPageBreakAfter > .ForcePageBreakAfter,
+h3.avoidPageBreakAfter > .ForcePageBreakAfter,
+h4.avoidPageBreakAfter > .ForcePageBreakAfter,
+h5.avoidPageBreakAfter > .ForcePageBreakAfter,
+h6.avoidPageBreakAfter > .ForcePageBreakAfter{
+    color: red;
+}
+
+h2.hasPageBreakBefore > .ForcePageBreakBefore,
+h3.hasPageBreakBefore > .ForcePageBreakBefore,
+h4.hasPageBreakBefore > .ForcePageBreakBefore,
+h5.hasPageBreakBefore > .ForcePageBreakBefore,
+h6.hasPageBreakBefore > .ForcePageBreakBefore,
+h2.hasPageBreakAfter > .ForcePageBreakAfter,
+h3.hasPageBreakAfter > .ForcePageBreakAfter,
+h4.hasPageBreakAfter > .ForcePageBreakAfter,
+h5.hasPageBreakAfter > .ForcePageBreakAfter,
+h6.hasPageBreakAfter > .ForcePageBreakAfter{
+    color: green;
+}
+
+h2:hover > .ForcePageBreakBefore,
+h3:hover > .ForcePageBreakBefore,
+h4:hover > .ForcePageBreakBefore,
+h5:hover > .ForcePageBreakBefore,
+h6:hover > .ForcePageBreakBefore,
+h2:hover > .ForcePageBreakAfter,
+h3:hover > .ForcePageBreakAfter,
+h4:hover > .ForcePageBreakAfter,
+h5:hover > .ForcePageBreakAfter,
+h6:hover > .ForcePageBreakAfter {
+    display:inline;
+}
+
+.section-number {
+    padding-right: 8px;
+    font-weight: bold;
+    color: rgb(0, 90, 190);
+    font-style: italic;
+}
+
+a[href^="tel:"] {
+  color: orange;
+  text-decoration: none;
+}
+
+a[href^="tel:"]:before {
+  content: "\260e";
+  margin-right: 0.5em;
+}
+
+@media screen {
+  .hasPageBreakAfter,
+  .hasPageBreakBefore {
+    border: 1px solid green;
+    border-right: 0px;
+    border-left: 0px;
+    }
+
+  .hasPageBreakBefore {
+    border-bottom: 0px;
+  }
+
+  .hasPageBreakAfter {
+    border-top: 0px;
+  }
+}
+
+@media print {
+    div.org-container > div.orgChapter input.hidden.ShowBlockTitleForce[type="checkbox"] +*+
+        block_title ,
+    block_title {
+        display: none;
+    }
+
+    div.org-container > div.orgChapter input.hidden.ShowBlockTitleForce[type="checkbox"]:checked+*+
+    block_title {
+	display: block;
+    }
+
+    block_title > label {
+	display: none !important;
+    }
+
+  .PrintXXXTransposed {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+
+  .no-print {display:none;}
+  .hasPageBreakBefore {page-break-before: always;}
+  .hasPageBreakAfter  {page-break-after:  always;}
+
+  thead {display: table-header-group; }
+
+@page {
+  size: A4;
+  margin-top: 0.6cm;
+  margin-right: 0.2cm;
+  margin-bottom: 0.2cm;
+  margin-left: 1.2cm;
+}
+
+}

@@ -1,0 +1,29 @@
+﻿//## <html><script src="js/org-render.js"></script><body><!--
+graph {
+    splines=line;
+    subgraph cluster_0 {
+        label="Subgraph A";
+        a; b; c
+    }
+
+    subgraph cluster_1 {
+        label="Subgraph B";
+        d; e;
+    }
+
+    a -- e;
+    a -- d;
+    b -- d;
+    b -- e;
+    c -- d;
+    c -- e;
+}
+
+//## Do not edit below this line, or know exactly what you are doing!
+//## Fold up these lines by visually selecting, then SPC
+
+//## DO NOT EDIT BELOW THIS LINE
+//## Local Variables:
+//## mode: graphviz-dot
+//## coding: utf-8-with-signature
+//## End:

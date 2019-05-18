@@ -1,0 +1,520 @@
+﻿#+Title: The Org-Mode Template Document explained
+ # <html><script src="js/org-render.js"></script><body><!--
+#+SETUPFILE: Template.setup.org.htm
+#+STARTUP: content align inlineimages latexpreview hideblocks
+#+options: toc:t
+
+* Usage Guidelines
+** Creating a new Document
+To create a new file based on this template, just execute the source-code-block (=C-c C-c=)in the next chapter.
+
+*** Create-New-File-From-Template
+
+#+NAME: Create-New-File-From-Template
+#+HEADER:  :var iFile=get-cfg-item(key="Empty-Template")
+#+HEADER:+ :results raw append
+#+BEGIN_SRC emacs-lisp
+;; Create-New-File-From-Template( iFile=get-cfg-item(key="Empty-Template") )
+(setq oFile (concat (read-string "Enter new <document>'.org.htm' name: ")
+                 ".org.htm"))
+(unless (file-exists-p iFile) (message "Input file does not exist"))
+(if (file-exists-p oFile) (message "Output file already exists"))
+(copy-file iFile oFile)
+(concat (format-time-string "%Y-%m-%d") " : [[" oFile "]] was created")
+#+END_SRC
+
+#+RESULTS: Create-New-File-From-Template
+
+
+** Creating Tables
+Basic form:
+
+#+BEGIN_SRC
+#+attr_html: class="sortable"
+|  |  |  |
+|-------
+|  |  |  |
+#+END_SRC
+
+You edit by jumping from field to field with =<TAB>=. WhiteSpace and Column lines are automatically readjusted at every jump.
+Filled example:
+#+BEGIN_SRC
+#+attr_html: class="sortable"
+| Hero     | Universe | Real Name     | Girlfriend     |
+|----------+----------+---------------+----------------|
+| Flash    | DC       | Bart Allen    | Something West |
+| Superman | DC       | Clark Kent    | Lois Lane      |
+| Hulk     | Marvel   | Dr. Something | Romanoff       |
+#+END_SRC
+
+You should name your tables, especially if they are a datastructure.
+Use syntax like this: "=#+NAME: SomeNametoChange=" in the line just before to give a name.
+
+This will also show some printing options, when =onMouseOver=.
+
+Complete filled example with table-name, and enabled sorting:
+
+#+NAME: List_of_Super_Heroes
+#+attr_html: class="sortable"
+| Hero     | Universe | Real Name     | Girlfriend     |
+|----------+----------+---------------+----------------|
+| Flash    | DC       | Bart Allen    | Something West |
+| Superman | DC       | Clark Kent    | Lois Lane      |
+| Hulk     | Marvel   | Dr. Something | Romanoff       |
+
+
+
+** Graph Integration                                             :Graphs:Dot:
+
+*** Example Graph with Layers
+#+NAME: Name3Graph
+#+BEGIN_SRC graphviz-dot
+graph LayersTest {
+  id="\G"; node [id="\N"]; edge [id="\T-\H"]  // Enhances programmatic access
+
+layers="local:pvt:test:new:ofc";
+layerselect="ofc"
+	node1  [layer="pvt"];
+	node2  [layer="all"];
+	node3  [layer="pvt:ofc"];		// pvt, test, new, and ofc 
+	node2 -- node3  [layer="pvt:all"];	/* same as pvt:ofc */
+	node2 -- node4 [layer=3];		/* same as test */
+
+
+}
+#+END_SRC
+** Image integration
+To add an image inline into a sentence like this:
+#+attr_html: width="20px"
+[[img/snom.png]], you will need to use syntax like in the following block:
+
+#+BEGIN_SRC org
+To add an image inline into a sentence like this:
+,#+attr_html: width="20px"
+[[img/snom.png]], you will need to use syntax like in the following block:
+#+END_SRC
+
+To insert the image freestanding, add a free line between the image specification and the preceding text.
+
+To insert images rotated, use a line like this
+
+#+BEGIN_SRC org
+,#+attr_html: style="image-orientation: 270deg;"
+#+END_SRC
+
+** Unicode Characters, Symbols and Pictographs
+If some symbols of your text or node or edge labels do not show up correctly, your file may be missing the [[https://en.wikipedia.org/wiki/Byte_order_mark][~Byte-Order-Mark (BOM)~]].
+
+Problematic symbol examples: 📞, …, 🖥. If you do not see a computer, 3 dots, and a phone you have to add the ~BOM~.
+
+*** Using Math                                                         :Math:
+To display α,β,γ,δ,ε,π and others in flowing text, just type them out like you would other characters.
+On the Linux systems these character can be easily typed by prefixing the wanted letter with =ALTGR-n=.
+
+Some formula examples using the following expression: x=\frac{-b ± \sqrt{b² - 4ac}}{2a}
+
+To display some mathematical notation inline in a phrase like this: \(x=\frac{-b ± \sqrt{b² - 4ac}}{2a}\), just enclose the expression in =\(= and =\)= delimiters.
+
+To force the display into a centered view on the document, use the =$$= notation, pre-, and post-fixing the expression with =$$=.
+$$x={-b \pm \sqrt{b^2 - 4ac}}\over{2a}$$
+
+*** Add/Remove/Verify the ~BOM~ with ~vim~                          :vim:BOM:
+To add/remove a ~BOM~ to a file, or check for existance, you have to open with ~vim~ an execute some commands at the colon prompt.
+
+- To query the existance of a ~BOM~:
+#+NAME: vim_view_bom
+#+BEGIN_SRC vim
+:setlocal bomb?
+#+END_SRC
+The output will be ~bomb~ or ~nobomb~.
+
+- To add a ~BOM~:
+#+NAME: vim_add_bom
+#+BEGIN_SRC vim
+:setlocal bomb
+#+END_SRC
+The output will be ~bomb~. Then you write and exit: ~:wq~.
+
+**** TODO Add section about the ~BOM~ and ~emacs~
+Something about 'coding utf8-with-signature'
+
+** Using Include files                                             :Includes:
+
+#+INCLUDE: "example.gv.htm" src graphviz-dot
+
+Include a file into an anonymous (= headerless) codeblock by using this syntax at the start of a line:
+
+=#+INCLUDE: "<filename>" src <language>=
+
+#+INCLUDE: "Empty.org.htm" src org
+
+Use this syntax if you want to include it inline, to be interpreted as org text, with the number indicating the sub-chapter leveling:
+
+=#+INCLUDE: "Empty.org.htm" :minlevel <number>=
+
+#+INCLUDE: "Empty.org.htm" :minlevel 3
+
+** Javascript Interactivity                                      :JavaScript:
+To add Javascript that will be evaluated in the live document, add one chapter named e.g.
+=*AutoExecuted-Javascript and use the Tag :AUTO_JS:=.
+It need not be a toplevel chapter, as the next example demonstrates. It's hidden in the default display mode. You can toggle visibility with the =Tags= menu.
+
+*** AutoExecuted Javascript                                         :AUTO_JS:
+
+This chapter may contain one block of javascript code, and optionally some
+descriptive paragraphs like this one.
+Code inserted into this block can be targeted to 4 different stages in page
+loading, as can be seen in the following example.
+
+In addition, or instead of this method, javascript code can also be written
+into a file named after the current file, with an additional =.js= suffix,
+so for this file the appropriate name would be =Template.org.htm.js=.
+
+#+NAME Javascript_autoexecute
+#+BEGIN_SRC javascript
+if (false) {
+    alert('This Code is executed, after loading CSS assets, but before other '
+    +'javascript includes. At this point <body> has no content.');
+}
+
+function PXXXostProcess() {
+    alert('The Code in this function will be called after initial org-Code rendering');
+};
+
+function PXXXostProcess_Every_Graph(graph) {
+    alert('Executed after every graph rendered, here for '+graph);
+};
+
+function PXXXostProcess_Graph_ShortName() {
+    alert('inside PostProcess-Graph-ShortName');
+};
+
+#+END_SRC
+
+** Adding own CSS                                                       :CSS:
+*** Auto-Injected CSS Content                                      :AUTO_CSS:
+To inject CSS into the current Document, add a chapter with a =:AUTO_CSS:= tag.
+It need not be a toplevel chapter, as the next example demonstrates. It's hidden in the default display mode. You can toggle visibility with the =Tags= menu.
+#+BEGIN_SRC css
+.yellow >* { color: yellow;
+  fill: yellow;
+}
+
+bXXXXlock_title {
+  display: none !important;
+  /*float: right;*/
+}
+
+#+END_SRC
+
+Observe the effect in the following graph:
+#+BEGIN_SRC graphviz-dot
+graph example2 {
+A -- B
+A[URL="#\" class=\"yellow"]
+}
+#+END_SRC
+** Adding custom HTML
+
+For raw HTML code blocks, use these HTML export code blocks:
+
+#+BEGIN_SRC org :noweb yes
+,#+HTML: <p>Literal <em>HTML</em> code for export</p>
+#+END_SRC
+→
+#+HTML: <p>Literal <em>HTML</em> code for export</p>
+
+*** TODO The multiline HTML export block does not work
+
+For larger =HTML= fragments:
+
+#+BEGIN_SRC org :noweb yes
+,#+BEGIN_EXPORT html
+<b>All</b> lines between these markers are exported literally<br/>
+including <i>script</i> and <i>style</i> tags.
+,#+END_EXPORT
+#+END_SRC
+→
+
+#+BEGIN_EXPORT html
+<b>All</b> lines between these markers are exported literally<br/>
+including <i>script</i> and <i>style</i> tags.
+#+END_EXPORT
+
+* Components
+This Documentation template is built up of several components, of which only the main markup file needs to be cloned into the same directory with a new name. The other components are (=will be) neatly arranged in corresponding subfolders.
+
+This table of settings is used to generate the template and the supporting files
+
+#+NAME: Settings-Table
+| cfgName        | cfgValue            | cfgComment                         |
+|----------------+---------------------+------------------------------------|
+| SCSS-Main      | [[css/org-view.scss][~css/org-view.scss~]] | Contains includes to other files   |
+| CSS-Main       | [[css/org-view.css][~css/org-view.css~]]  | Finished expanded result from scss |
+| JS-Main        | [[js/org-render.js][~js/org-render.js~]]  | Main Javascript file               |
+| Empty-Template | [[Empty.org.htm][~Empty.org.htm~]]     |                                    |
+
+#+NAME: get-cfg-item
+#+BEGIN_SRC emacs-lisp :var cfgTable=Settings-Table :var key="SCSS-Main"
+;; get-cfg-item(key="SCSS-Main")
+(replace-regexp-in-string "\\].*$" ""
+  (replace-regexp-in-string "\\[\\[" ""
+    (car (cdr (assoc key cfgTable)))))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp :noweb yes :tangle no
+(defun get-config-item(key cfgTable)
+  "get a configuration item from table"
+  <<get-cfg-item>>
+)
+#+END_SRC
+
+** The Org File                                                         :Org:
+This file conforms to the ORG-Mode syntax completely, and is /nearly/ valid HTML, but enough so to be interpreted as such by browsers. The tags triggering this behavior are embedded in the first and last org-mode comment lines. Among those tags is one to execute an external javascript, to then render the page.
+
+This allows this file to be easily viewed in the browser in the rendered state , with clientside javascript animation for display of values and states. This enables the documentation to also be the reporting tool for many situations.
+
+In broad strokes, the document has four parts:
+
+- First text line contains the Document title in org =#+Title:= syntax
+- A block of a few lines containing some necessary preamble
+- The main document content
+- A block of a few lines containing some necessary postamble
+
+*** The Empty Template
+:PROPERTIES:
+:header-args: :tangle Empty.org.htm
+:END:
+
+**** Detailed Structure of the file
+
+Technically, the document consists of  parts:
+
+- First text line contains the Document title in org =#+Title:= syntax
+- Second line is an org comment (=/^ # /=) containing basic html tags and opening html comment tag (=<!--=)
+- Following block contains header lines with options essential to correct template function, and some user modifiable parameters.
+- The main =org= document content
+- The final "Document Statistics:" chapter, where information will dynamically be inserted
+- A document footer with emacs "Local Variables" section
+
+
+**** UTF-8 Byte Order Mark
+When properly generated by tangling the template file will have a Byte-Order-Mark at the beginning. This is *necessary* to correctly display many icon characters, math symbols and emojis.
+
+**** Template Preamble
+
+The template has a preformatted line at the top to specify the Document title.
+
+#+NAME: AuthorNameGet
+#+BEGIN_SRC emacs-lisp :tangle no
+(if (eq "" (getenv "U_FullName")) (getenv "USER") (getenv "U_FullName"))
+#+END_SRC
+
+#+NAME: OrgTemplateBegin
+#+BEGIN_SRC org :noweb yes
+  ,#+Title: The Org-Mode Empty Template
+   # <html><script src="<<get-cfg-item(key="JS-Main")>>"></script><body><!--
+  ,#+Author: <<AuthorNameGet()>>
+  ,#+LINK: wikipedia    https://en.wikipedia.org/wiki/
+  ,#+LINK: firewall     http://langw/
+  ,#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="<<get-cfg-item(key="CSS-Main")>>" />
+  ,#+options: toc:t
+   # Your Content starts here:
+
+#+END_SRC
+
+**** Template End lines
+#+NAME: OrgTemplateEnd
+#+BEGIN_SRC org :noweb yes
+  ,* First Chapter
+  ,** Second Chapter
+
+   # Do not edit below this line, or know exactly what you are doing!
+   # Fold up these lines by visually selecting, then SPC
+
+   # DO NOT EDIT BELOW THIS LINE
+   # Local Variables:
+   # mode: org
+   # coding: utf-8-with-signature
+   # End:
+#+END_SRC
+
+**** Compiling the Empty template
+
+- =Tangle= this chapter, press =C-c C-v C-t= to do this.
+
+** Javascript files                                              :JavaScript:
+#+NAME: JSFiles
+| Path/File.Name   | Description           | Comment                           |
+|------------------+-----------------------+-----------------------------------|
+| [[js/org-render.js]] | Main script           | Maintained in-house               |
+| [[js/org.js]]        | org renderer          | [[http://mooz.github.io/org-js/][From Github]]                       |
+| [[js/viz-lite.js]]   | Graphviz renderer     | [[http://viz-js.com/][From viz-js.com]]                   |
+| [[js/viz-full.js]]   | Graphviz renderer     | has Neato & Expat, currently used |
+| datatables       | Soon: Tables Renderer | Already used in C2D and othes     |
+|------------------+-----------------------+-----------------------------------|
+** CSS files                                                            :CSS:
+#+NAME: CSSFiles
+| Path/File.Name      | Description | In-House | Comment                                    |
+|---------------------+-------------+----------+--------------------------------------------|
+| [[css/org-view.css][~css/org-view.css~]]  | First       | [x]      | Generated from =SCSS= content in this file |
+| [[gv.htm.css][~gv.htm.css~]]        | Css Mess    | [x]      | more rules 2migrate, then 2delete          |
+| datatables.css      | Nice Tables |          | 2integrate someday                         |
+|---------------------+-------------+----------+--------------------------------------------|
+
+*** ColorTable                                                       :Colors:
+
+#+NAME: ColorTable
+| VarName                | VarValue | Colour Usage |
+|------------------------+----------+--------------|
+| CorpBlue               | \#0089A7 |              |
+| CorpRed                | \#CC061E |              |
+| CorpOrange             | \#EF8201 |              |
+| tableHeaderColor       | \#CCC    |              |
+| tableEvenRowColor      | \#EEE    |              |
+| tableOddRowColor       | \#FFF    |              |
+| tableRowHighlightColor | \#FFFF00 |              |
+| CorpGreen              | \#89A81D |              |
+
+**** TODO Complete Table
+**** table to vars
+*** Generation of CSS with SCSS                                        :SCSS:
+:PROPERTIES:
+:Main-SCSS-File: css/org-view.scss
+:header-args: :tangle css/org-view.scss
+:END:
+The main SCSS file Link: =org-view.scss= will be generated from the code blocks in the following sections of this file.
+
+**** Standard color variables
+#+NAME: MakeColorVariables
+#+HEADER: :var clrs=ColorTable
+#+HEADER: :results verbatim
+#+HEADER: :tangle no
+#+BEGIN_SRC awk
+BEGIN {
+  split(clrs,arr,"\n");
+  for (i=1;i<=length(arr);i++) {
+    print gensub(/^(.*).(#.*).$/, "$\\1\t: \\2;", "g", arr[i]);
+  }
+}
+#+END_SRC
+
+**** Used =SCSS= files
+ #+NAME: SCSSIncludeFiles
+| Path/File.Name | Description    | In-House | Comment |
+|----------------+----------------+----------+---------|
+| org-view.scss  | Main file      |          |         |
+| _tables.scss   | tables include |          |         |
+| _org.scss      | org include    |          |         |
+| _svg.scss      | svg include    |          |         |
+|----------------+----------------+----------+---------|
+
+#+NAME: MakeSCSSImportsList
+#+HEADER: :var importsList=SCSSIncludeFiles[,0]
+#+HEADER: :results verbatim
+#+HEADER: :tangle no
+#+BEGIN_SRC awk
+END { split(importsList,arr,"\n");
+      for (i=3;i<=length(arr);i++) {
+        print gensub(/^_(.*scss).*$/, "@import '\\1';", "g", arr[i]);
+      }
+}
+#+END_SRC
+
+#+RESULTS: MakeSCSSImportsList
+: @import 'tables.scss';
+: @import 'org.scss';
+: @import 'svg.scss';
+
+#+BEGIN_SRC scss :noweb yes
+  /* This file contains the scss code */
+
+  /* Variables for standard colors */
+  <<MakeColorVariables()>>
+
+  /* List of imports */
+  <<MakeSCSSImportsList()>>
+#+END_SRC
+
+**** File _tables.scss
+#+NAME: tables-scss
+#+BEGIN_SRC scss
+/* Rules for styling tables */
+
+$tableHeaderColor:        #CCC;
+$tableEvenRowColor:       #EEE;
+$tableOddRowColor:        #FFF;
+$tableRowHighlightColor:  yellow;
+
+@mixin printableBackgroundColor($color) {
+  background-color: unset;
+  box-shadow: inset 0 0 0 1000px $color /* 1000px is a random big number that
+                                           is definitely larger than the box
+                                           dimension */
+}
+#+END_SRC
+
+
+
+**** Compiling SCSS Files                                              :SASS:
+To compile SCSS files, use the command:
+#+BEGIN_SRC sh :tangle no
+sass -l myCSS.scss myCSS.css
+#+END_SRC
+
+** Predefined Icons, Logos, and other image assets
+The following images are available to use as image filenames in nodes:
+
+#+INCLUDE: "img/RJ45.svg" src svg
+
+#+INCLUDE: "img/SFP.svg" src svg
+
+#+NAME: VizJSImages
+| Path/File.Name     | Picture       | height | width | Image Contents    |
+|--------------------+---------------+--------+-------+-------------------|
+| img/RJ45.svg       | [[img/RJ45.svg]]  | 25px   | 29px  | Network Plug DOWN |
+| img/RJ45U.svg      | [[img/RJ45U.svg]] | 25px   | 29px  | Network Plug UP   |
+| img/SFP.svg        | [[img/SFP.svg]]   | 19px   | 28px  | SFP Plug          |
+
+Note the *img/* prefix!
+
+*** TODO Fix Image predefinitions
+- Add more types of common connectors (SchuKo, Serial, RJ11)
+- Fix image size properties in the above table and the javascript source of [[js/org-render.js]].
+
+* Random Notes and TODOs
+
+ # + HTML: <div max-width="100%" style="display: table;"><div style="padding: 50% 0; height: 0;">
+
+ # + CAPTION: This is the caption for the next figure link (or table)
+ # + NAME:   fig:SED-HR4049
+ # + attr_html: style="display:block;transform-origin: top left;transform: rotate(-90deg) translate(-100%);margin-top: -50%;white-space: nowrap; max-width:100%; max-height=100%;"
+ # + HTML: </div></div>
+
+** CSS Hacks                                                 :Hacks:AUTO_CSS:
+To inject CSS into the current Document, add a chapter with a =:AUTO_CSS:= tag.
+#+BEGIN_SRC css
+.yellow >*:hover {
+  color: brown;
+  fill: brown;
+}
+
+#+END_SRC
+
+
+** TODO FIX (SCSS) Situation                                           :TODO:
+** TODO Neatly arrange all related file assets into corresponding subfolders
+Nearly done, mostly now old stuff to delete after verifying all content was ported.
+** TODO Add syntay highlighting for missing languages
+** TODO Add querystring extraction, to preselect chapters, graphs, or tables
+** TODO =org.js= autolinks URLs in SOURCE Blocks, which is not useful for =viz.js=
+
+
+ # Do not edit below this line, or know exactly what you are doing!
+ # Fold up these lines by visually selecting, then SPC
+
+ # DO NOT EDIT BELOW THIS LINE
+ # Local Variables:
+ # mode: org
+ # coding: utf-8-with-signature
+ # End:
