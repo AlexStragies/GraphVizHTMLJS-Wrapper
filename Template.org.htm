@@ -1,12 +1,14 @@
-﻿#+Title: The Org-Mode Template Document explained
- # <html><script src="js/org-render.js"></script><body><!--
+﻿ # <html -*- mode: org ; coding: utf-8-with-signature -*- >
+ # <script src="js/org-render.js"></script><body><!--
 #+SETUPFILE: Template.setup.org.htm
-#+STARTUP: content align inlineimages latexpreview hideblocks
+
+ # Your Content starts here:
+#+Title: The Org-Mode Template Document explained
 #+options: toc:t
 
 * Usage Guidelines
 ** Creating a new Document
-To create a new file based on this template, just execute the source-code-block (=C-c C-c=)in the next chapter.
+Copy the Empty.org.htm to NewName.org.htm
 
 *** Create-New-File-From-Template
 
@@ -76,7 +78,7 @@ layers="local:pvt:test:new:ofc";
 layerselect="ofc"
 	node1  [layer="pvt"];
 	node2  [layer="all"];
-	node3  [layer="pvt:ofc"];		// pvt, test, new, and ofc 
+	node3  [layer="pvt:ofc"];		// pvt, test, new, and ofc
 	node2 -- node3  [layer="pvt:all"];	/* same as pvt:ofc */
 	node2 -- node4 [layer=3];		/* same as test */
 
@@ -86,12 +88,12 @@ layerselect="ofc"
 ** Image integration
 To add an image inline into a sentence like this:
 #+attr_html: width="20px"
-[[img/snom.png]], you will need to use syntax like in the following block:
+[[img/RJ45.svg]], you will need to use syntax like in the following block:
 
 #+BEGIN_SRC org
 To add an image inline into a sentence like this:
 ,#+attr_html: width="20px"
-[[img/snom.png]], you will need to use syntax like in the following block:
+[[img/RJ45.svg]], you will need to use syntax like in the following block:
 #+END_SRC
 
 To insert the image freestanding, add a free line between the image specification and the preceding text.
@@ -103,9 +105,9 @@ To insert images rotated, use a line like this
 #+END_SRC
 
 ** Unicode Characters, Symbols and Pictographs
-If some symbols of your text or node or edge labels do not show up correctly, your file may be missing the [[https://en.wikipedia.org/wiki/Byte_order_mark][~Byte-Order-Mark (BOM)~]].
+If some symbols of your text or node or edge labels do not show up correctly, your file may be missing the [[https://en.wikipedia.org/wiki/Byte_order_mark][~Byte-Order-Mark (BOM)~]]. Normally, the first line of this file forces saving with a BOM.
 
-Problematic symbol examples: 📞, …, 🖥. If you do not see a computer, 3 dots, and a phone you have to add the ~BOM~.
+Problematic symbol examples: 📞, …, 🖥. If you do not see a computer, 3 dots, and a phone you have to add the ~BOM~. Try save, close, and re-open.
 
 *** Using Math                                                         :Math:
 To display α,β,γ,δ,ε,π and others in flowing text, just type them out like you would other characters.
@@ -117,26 +119,6 @@ To display some mathematical notation inline in a phrase like this: \(x=\frac{-b
 
 To force the display into a centered view on the document, use the =$$= notation, pre-, and post-fixing the expression with =$$=.
 $$x={-b \pm \sqrt{b^2 - 4ac}}\over{2a}$$
-
-*** Add/Remove/Verify the ~BOM~ with ~vim~                          :vim:BOM:
-To add/remove a ~BOM~ to a file, or check for existance, you have to open with ~vim~ an execute some commands at the colon prompt.
-
-- To query the existance of a ~BOM~:
-#+NAME: vim_view_bom
-#+BEGIN_SRC vim
-:setlocal bomb?
-#+END_SRC
-The output will be ~bomb~ or ~nobomb~.
-
-- To add a ~BOM~:
-#+NAME: vim_add_bom
-#+BEGIN_SRC vim
-:setlocal bomb
-#+END_SRC
-The output will be ~bomb~. Then you write and exit: ~:wq~.
-
-**** TODO Add section about the ~BOM~ and ~emacs~
-Something about 'coding utf8-with-signature'
 
 ** Using Include files                                             :Includes:
 
@@ -270,73 +252,63 @@ This table of settings is used to generate the template and the supporting files
 #+END_SRC
 
 ** The Org File                                                         :Org:
-This file conforms to the ORG-Mode syntax completely, and is /nearly/ valid HTML, but enough so to be interpreted as such by browsers. The tags triggering this behavior are embedded in the first and last org-mode comment lines. Among those tags is one to execute an external javascript, to then render the page.
+This file conforms to the ORG-Mode syntax completely, and is /nearly/ valid HTML, but enough so to be interpreted as such by browsers. The tags triggering this behavior are embedded in the first and second org-mode comment lines. Other parts are automatically pulled from other files.
+
+- Embedded within the tag in the first line are display-, and formating-options for emacs.
+- The second line calls an external javascript, to then render the page.
+- The third line points to an external org-setup-file, to collect common settings, and keep the boilerplate code in the template small.
+- In the following lines a title should be given in specific syntax.
 
 This allows this file to be easily viewed in the browser in the rendered state , with clientside javascript animation for display of values and states. This enables the documentation to also be the reporting tool for many situations.
-
-In broad strokes, the document has four parts:
-
-- First text line contains the Document title in org =#+Title:= syntax
-- A block of a few lines containing some necessary preamble
-- The main document content
-- A block of a few lines containing some necessary postamble
 
 *** The Empty Template
 :PROPERTIES:
 :header-args: :tangle Empty.org.htm
 :END:
 
-**** Detailed Structure of the file
-
-Technically, the document consists of  parts:
-
-- First text line contains the Document title in org =#+Title:= syntax
-- Second line is an org comment (=/^ # /=) containing basic html tags and opening html comment tag (=<!--=)
-- Following block contains header lines with options essential to correct template function, and some user modifiable parameters.
-- The main =org= document content
-- The final "Document Statistics:" chapter, where information will dynamically be inserted
-- A document footer with emacs "Local Variables" section
-
-
 **** UTF-8 Byte Order Mark
 When properly generated by tangling the template file will have a Byte-Order-Mark at the beginning. This is *necessary* to correctly display many icon characters, math symbols and emojis.
 
-**** Template Preamble
+**** Org Comment (=/^ # /=) with embedded =<html>= tag with embedded Emacs document level variables.
 
-The template has a preformatted line at the top to specify the Document title.
+#+BEGIN_SRC org :noweb yes
+ ,# <html -*- mode: org ; coding: utf-8-with-signature -*- >
+#+END_SRC
+The second one variable triggers saving with a ~BOM~.
+
+**** Org Comment (=/^ # /=) with embedded script tag
+#+BEGIN_SRC org :noweb yes
+ ,# <script src="<<get-cfg-item(key="JS-Main")>>"></script><body><!--
+#+END_SRC
+This line ends with an opening HTML comment tag (=<!--=).
+
+**** Reference to the external org setup file
+#+BEGIN_SRC org :noweb yes
+,#+SETUPFILE: Template.setup.org.htm
+
+#+END_SRC
+This file contains options essential to correct template function, and some user modifiable parameters. See the seperate Chapter below for more details.
+
+**** Document title in org =#+Title:= syntax
+#+BEGIN_SRC org :noweb yes
+,#+Title: The Org-Mode Empty Template
+#+END_SRC
+
+**** The main =org= document content
+#+NAME: OrgTemplateEnd
+#+BEGIN_SRC org :noweb yes
+ ,# Your Content starts here:
+
+  ,* First Chapter
+  ,** Second Chapter
+
+#+END_SRC
+
+**** Name helper function used in setup file
 
 #+NAME: AuthorNameGet
 #+BEGIN_SRC emacs-lisp :tangle no
 (if (eq "" (getenv "U_FullName")) (getenv "USER") (getenv "U_FullName"))
-#+END_SRC
-
-#+NAME: OrgTemplateBegin
-#+BEGIN_SRC org :noweb yes
-  ,#+Title: The Org-Mode Empty Template
-   # <html><script src="<<get-cfg-item(key="JS-Main")>>"></script><body><!--
-  ,#+Author: <<AuthorNameGet()>>
-  ,#+LINK: wikipedia    https://en.wikipedia.org/wiki/
-  ,#+LINK: firewall     http://langw/
-  ,#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="<<get-cfg-item(key="CSS-Main")>>" />
-  ,#+options: toc:t
-   # Your Content starts here:
-
-#+END_SRC
-
-**** Template End lines
-#+NAME: OrgTemplateEnd
-#+BEGIN_SRC org :noweb yes
-  ,* First Chapter
-  ,** Second Chapter
-
-   # Do not edit below this line, or know exactly what you are doing!
-   # Fold up these lines by visually selecting, then SPC
-
-   # DO NOT EDIT BELOW THIS LINE
-   # Local Variables:
-   # mode: org
-   # coding: utf-8-with-signature
-   # End:
 #+END_SRC
 
 **** Compiling the Empty template
@@ -355,12 +327,12 @@ The template has a preformatted line at the top to specify the Document title.
 |------------------+-----------------------+-----------------------------------|
 ** CSS files                                                            :CSS:
 #+NAME: CSSFiles
-| Path/File.Name      | Description | In-House | Comment                                    |
-|---------------------+-------------+----------+--------------------------------------------|
-| [[css/org-view.css][~css/org-view.css~]]  | First       | [x]      | Generated from =SCSS= content in this file |
-| [[gv.htm.css][~gv.htm.css~]]        | Css Mess    | [x]      | more rules 2migrate, then 2delete          |
-| datatables.css      | Nice Tables |          | 2integrate someday                         |
-|---------------------+-------------+----------+--------------------------------------------|
+| Path/File.Name     | Description | In-House | Comment                                    |
+|--------------------+-------------+----------+--------------------------------------------|
+| [[css/org-view.css][~css/org-view.css~]] | First       | [x]      | Generated from =SCSS= content in this file |
+| [[gv.htm.css][~gv.htm.css~]]       | Css Mess    | [x]      | more rules 2migrate, then 2delete          |
+| datatables.css     | Nice Tables |          | 2integrate someday                         |
+|--------------------+-------------+----------+--------------------------------------------|
 
 *** ColorTable                                                       :Colors:
 
@@ -470,11 +442,11 @@ The following images are available to use as image filenames in nodes:
 #+INCLUDE: "img/SFP.svg" src svg
 
 #+NAME: VizJSImages
-| Path/File.Name     | Picture       | height | width | Image Contents    |
-|--------------------+---------------+--------+-------+-------------------|
-| img/RJ45.svg       | [[img/RJ45.svg]]  | 25px   | 29px  | Network Plug DOWN |
-| img/RJ45U.svg      | [[img/RJ45U.svg]] | 25px   | 29px  | Network Plug UP   |
-| img/SFP.svg        | [[img/SFP.svg]]   | 19px   | 28px  | SFP Plug          |
+| Path/File.Name | Picture       | height | width | Image Contents    |
+|----------------+---------------+--------+-------+-------------------|
+| img/RJ45.svg   | [[img/RJ45.svg]]  | 25px   | 29px  | Network Plug DOWN |
+| img/RJ45U.svg  | [[img/RJ45U.svg]] | 25px   | 29px  | Network Plug UP   |
+| img/SFP.svg    | [[img/SFP.svg]]   | 19px   | 28px  | SFP Plug          |
 
 Note the *img/* prefix!
 
@@ -508,13 +480,3 @@ Nearly done, mostly now old stuff to delete after verifying all content was port
 ** TODO Add syntay highlighting for missing languages
 ** TODO Add querystring extraction, to preselect chapters, graphs, or tables
 ** TODO =org.js= autolinks URLs in SOURCE Blocks, which is not useful for =viz.js=
-
-
- # Do not edit below this line, or know exactly what you are doing!
- # Fold up these lines by visually selecting, then SPC
-
- # DO NOT EDIT BELOW THIS LINE
- # Local Variables:
- # mode: org
- # coding: utf-8-with-signature
- # End:
