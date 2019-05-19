@@ -5,7 +5,10 @@
 'use strict';
 var SETUP={
   debug: true,
-  cache: true
+  cache: true,
+  JS: {
+    VIZJS: "viz.js"
+  }
 }
 var DEBUG=true
 var preRendered;
