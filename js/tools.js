@@ -39,9 +39,14 @@ function fetchFileContents(fNamePath) {
   info('Fetching File Contents: ' + fNamePath)
   var request = new XMLHttpRequest();
   request.open('GET', fNamePath, false);  // `false` makes the request synchronous
-  request.send(null);
-  if(request.status === 200) {
-    return request.responseText;
+  try {
+    request.send(null);
+    if(request.status === 200) {
+      return request.responseText;
+    }
+  } catch (e) {
+    debug('Could not fetch include '+ fNamePath)
+    return '';
   }
 }
 

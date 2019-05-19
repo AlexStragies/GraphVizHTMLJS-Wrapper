@@ -3,6 +3,10 @@
 
 // Settings:
 'use strict';
+var SETUP={
+  debug: true,
+  cache: true
+}
 var DEBUG=true
 var preRendered;
 var orgContainer='.org-container'
@@ -43,11 +47,16 @@ else {
     })
 }
 
-if (localStorage.getItem('FormatVersion')<localStorageFormatVersion) {
-  localStorage.clear();
-  localStorage.setItem('FormatVersion',localStorageFormatVersion);
+try {
+  if (typeof localStorage !== 'undefined') {
+    if (localStorage.getItem('FormatVersion')<localStorageFormatVersion) {
+      localStorage.clear();
+      localStorage.setItem('FormatVersion',localStorageFormatVersion);
+    }
+  }
+} catch (e) {
+  SETUP.cache=false;
 }
-
 // Some tool functions:
 
 function loadJSFile(src, fn_onload, dest=document.head, async=true) {
@@ -657,6 +666,7 @@ function PostProcessSvgStandard(svgDest){
 }
 
 async function cleanOrgCacheItems(exclude){
+  if(!SETUP.cache) return '';
   console.log('Cleaning old CacheItems')
   var i=0,key;
   while(key=localStorage.key(i++))
@@ -697,10 +707,12 @@ function RenderOrgToHTML(orgCode){
 }
 
 async function storeCacheItem(itemName, itemValue) {
+  if(!SETUP.cache) return '';
   localStorage.setItem(itemName, LZString.compress(itemValue));
 }
 
 function getCacheItem(itemName) {
+  if(!SETUP.cache) return '';
   var val = localStorage.getItem(itemName);
   if (val) {
     localStorage
@@ -711,7 +723,7 @@ function getCacheItem(itemName) {
 }
 
 async function extractDocTitleFromOrgAndSet(orgCode) {
-  info('Attempting to extract Document title from:\n'+orgCode);
+  info('Attempting to extract Document title from:\n'+orgCode.substr(0,300));
   var orgTitle;
   if (orgTitle=/#\+Title: ([^\n\r]*)/.exec(orgCode)){
     info('Setting Page Title to "'+orgTitle[1]+'"');
@@ -728,7 +740,7 @@ async function extractDocCSSFromOrgAndLoad(src) {
   orgCSSFinder=/^#\+HTML_HEAD: (.*?stylesheet.*?css.*?href="(.*?)".*?\/>)/gm ;
   if (orgCSS=orgCSSFinder.exec(src)){
     debug('found HTML HEAD CSS: '+orgCSS[1]);
-    alert(orgCSS[2]);
+    //alert(orgCSS[2]);
     document.head.insertAdjacentHTML('beforeend', orgCSS[1]);
   }
 }
@@ -798,11 +810,12 @@ function L1PostProcess(event) {
 
   var org = dbc[0].textContent; // Here we get the Org Doc Title (=First line)
   dbc[0].remove();
-  extractDocTitleFromOrgAndSet(org);
   // Retrieving rest of Org Doc Source
   dbc.forEach(e => { if (e.nodeType== 8) org+=e.textContent;
               if (e.nodeType!=1) e.remove();        })
   dbc[0].remove();              // Cleaning up
+
+  extractDocTitleFromOrgAndSet(org);
 
   db.innerHTML='\n<nav id="navBar"></nav>\n<hr>\n'
     + '<div class="'+orgContainer.substr(1)+'">\n</div>\n';
@@ -840,5 +853,11 @@ if (preRendered) {
                      })
 } else {
   // This is the case, when the "raw" org file is displayed in the browser, and needs to be rendered by JavaScript
-  document.addEventListener("DOMContentLoaded", L1PostProcess);
+  //document.addEventListener("DOMContentLoaded", L1PostProcess);
+  document
+    .addEventListener("DOMContentLoaded"
+                      , function () {
+                        //findAndRenderGraphVizIntoTabGroups();
+                        loadJSFile('js/tools.js',L1PostProcess);
+                     })
 }
