@@ -635,6 +635,16 @@ a[href^="tel:"]:before {
   margin-right: 0.5em;
 }
 
+c31b, c32b, c33b, c34b, c35b {
+    font-weight:bold;
+}
+
+c31, c31b {color: red;}
+c32, c32b {color: green;}
+c33, c33b {color: yellow;}
+c34, c34b {color: blue;}
+c35, c35b {color: purple;}
+
 @media screen {
   .hasPageBreakAfter,
   .hasPageBreakBefore {

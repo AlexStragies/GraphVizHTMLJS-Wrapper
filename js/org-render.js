@@ -758,6 +758,40 @@ function PostProcessOrgSource(src) {
   if (!src.match(/\s\* Document Statistics\S/)) {
     src+="\n\n* Document Statistics :STATS:\n";
   }
+  src=TranslateANSI(src)
+  return src
+}
+
+function TranslateANSI(src) {
+  var AnsiFinder=/^#.BEGIN_SRC ANSI[\s\S]([\s\S]*?)[\s\S]#\+END_SRC/gm
+  var ansiRender = function(ansi) {
+    ansi=ansi.replace(/XYZA/, '')
+      .replace(/^(#.BEGIN_)SRC ANSI/, '$1HTML\n<pre>')
+      .replace(/(#.END_)SRC/,'</pre>\n$1HTML')
+      .replace(/.\[1m.\[31m(.*?).\[0m/g,"<c31b>$1</c31b>") //red
+      .replace(/.\[31;91m(.*?).\[0m/g,"<c31b>$1</c31b>")
+      .replace(/.\[31m(.*?).\[0m/g,"<c31>$1</c31>")
+      .replace(/.\[1m.\[32m(.*?).\[0m/g,"<c32b>$1</c32b>") //green
+      .replace(/.\[32;92m(.*?).\[0m/g,"<c32b>$1</c32b>")
+      .replace(/.\[32m(.*?).\[0m/g,"<c32>$1</c32>")
+      .replace(/.\[1m.\[33m(.*?).\[0m/g,"<c33b>$1</c33b>") //yellow
+      .replace(/.\[33;93m(.*?).\[0m/g,"<c33b>$1</c33b>")
+      .replace(/.\[33m(.*?).\[0m/g,"<c33>$1</c33>")
+      .replace(/.\[1m.\[34m(.*?).\[0m/g,"<c34b>$1</c34b>") //blue
+      .replace(/.\[34;94m(.*?).\[0m/g,"<c34b>$1</c34b>")
+      .replace(/.\[34m(.*?).\[0m/g,"<c34>$1</c34>")
+      .replace(/.\[1m.\[35m(.*?).\[0m/g,"<c35b>$1</c35b>") //purple
+      .replace(/.\[35;95m(.*?).\[0m/g,"<c35b>$1</c35b>")
+      .replace(/.\[35m(.*?).\[0m/g,"<c35>$1</c35>")
+      .replace(/.\[1m.\[36m(.*?).\[0m/g,"<c36b>$1</c36b>") //cyan
+      .replace(/.\[36;95m(.*?).\[0m/g,"<c36b>$1</c36b>")
+      .replace(/.\[36m(.*?).\[0m/g,"<c36>$1</c36>")
+      .replace(/.\[1m(.*?).\[0m/g,"<b>$1</b>") //bold
+      .replace(/.\[0m/g,'');
+    alert(ansi);
+    return ansi;
+  }
+  src=src.replace(AnsiFinder, ansiRender);
   return src
 }
 
